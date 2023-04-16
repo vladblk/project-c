@@ -1,17 +1,17 @@
-const Destination = require("../models/destinationModel");
+const Destination = require('../models/destinationModel');
 
 exports.getAllDestinations = async (req, res) => {
   try {
     const destinations = await Destination.find();
 
     res.status(200).json({
-      status: "success",
+      status: 'success',
       results: destinations.length,
       data: { destinations },
     });
   } catch (err) {
     res.status(400).json({
-      status: "fail",
+      status: 'fail',
       message: err,
     });
   }
@@ -24,12 +24,12 @@ exports.getDestination = async (req, res) => {
     const destination = await Destination.findById(id);
 
     res.status(200).json({
-      status: "success",
+      status: 'success',
       data: { destination },
     });
   } catch (err) {
     res.status(400).json({
-      status: "fail",
+      status: 'fail',
       message: err,
     });
   }
@@ -40,12 +40,12 @@ exports.addDestination = async (req, res) => {
     const destination = await Destination.create(req.body);
 
     res.status(201).json({
-      status: "success",
+      status: 'success',
       data: { destination },
     });
   } catch (err) {
     res.status(400).json({
-      status: "fail",
+      status: 'fail',
       message: err,
     });
   }
@@ -60,12 +60,12 @@ exports.updateDestination = async (req, res) => {
     const updateDestination = await Destination.findById(id);
 
     res.status(200).json({
-      status: "success",
+      status: 'success',
       data: { updateDestination },
     });
   } catch (err) {
     res.status(400).json({
-      status: "fail",
+      status: 'fail',
       message: err,
     });
   }
@@ -78,11 +78,11 @@ exports.deleteDestination = async (req, res) => {
     await Destination.findByIdAndRemove(id);
 
     res.status(203).json({
-      status: "success",
+      status: 'success',
     });
   } catch (err) {
     res.status(400).json({
-      status: "fail",
+      status: 'fail',
       message: err,
     });
   }
