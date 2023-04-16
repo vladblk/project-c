@@ -1,9 +1,18 @@
 const Destination = require('../models/destinationModel');
+const APIFeatures = require('../utils/apiFeatures');
 
 exports.getAllDestinations = async (req, res) => {
   try {
-    const destinations = await Destination.find();
+    const features = new APIFeatures(Destination, req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
 
+    // executing query
+    const destinations = await features.query;
+
+    // sending response
     res.status(200).json({
       status: 'success',
       results: destinations.length,
