@@ -6,6 +6,14 @@ const destinationSchema = new mongoose.Schema({
     required: [true, 'A destination must have a name!'],
     unique: true,
     trim: true,
+    maxlength: [40, 'A destination name must have a max of 40 characters!'],
+    minlength: [10, 'A destination name must have a min of 10 characters!'],
+    validate: {
+      validator: function (nameValue) {
+        return Boolean(nameValue.match(/^[A-Za-z ]*$/));
+      },
+      message: 'A destination name must contain only letters!',
+    },
   },
   price: {
     type: Number,
@@ -13,6 +21,12 @@ const destinationSchema = new mongoose.Schema({
   },
   discount: {
     type: Number,
+    validate: {
+      validator: function (discountValue) {
+        return discountValue < this.price;
+      },
+      message: 'The discount can  not be lower than the regular price!',
+    },
   },
   ratingsAverage: {
     type: Number,
@@ -33,6 +47,10 @@ const destinationSchema = new mongoose.Schema({
   difficulty: {
     type: String,
     required: [true, 'A tour must have a difficulty!'],
+    enum: {
+      values: ['easy', 'medium', 'hard'],
+      message: 'A destination difficulty can be either easy, medium or hard!',
+    },
   },
   summary: {
     type: String,

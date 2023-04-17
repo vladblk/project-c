@@ -64,7 +64,10 @@ exports.updateDestination = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await Destination.findByIdAndUpdate(id, req.body);
+    await Destination.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidatoers: true,
+    });
 
     const updateDestination = await Destination.findById(id);
 
