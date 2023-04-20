@@ -1,101 +1,101 @@
 const Destination = require('../models/destinationModel');
 const APIFeatures = require('../utils/apiFeatures');
+const AppError = require('../utils/appError');
+const catchAsync = require('../utils/catchAsync');
 
-exports.getAllDestinations = async (req, res) => {
-  try {
-    const features = new APIFeatures(Destination, req.query)
-      .filter()
-      .sort()
-      .limitFields()
-      .paginate();
+//const catchAsync = (fn) => {
+//return (req, res, next) => {
+//fn(req, res, next).catch((error) => next(error));
+//};
+//};
 
-    // executing query
-    const destinations = await features.query;
+exports.getAllDestinations = catchAsync(async (req, res) => {
+  const features = new APIFeatures(Destination, req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
 
-    // sending response
-    res.status(200).json({
-      status: 'success',
-      results: destinations.length,
-      data: { destinations },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
+  // executing query
+  const destinations = await features.query;
+
+  // sending response
+  res.status(200).json({
+    status: 'success',
+    results: destinations.length,
+    data: { destinations },
+  });
+});
+
+exports.getDestination = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+
+  const destination = await Destination.findById(id);
+
+  if (!destination) {
+    const message = `No destination found with id: ${id}`;
+    const statusCode = 404;
+    const error = new AppError(message, statusCode);
+
+    next(error);
+    return;
   }
-};
 
-exports.getDestination = async (req, res) => {
-  try {
-    const { id } = req.params;
+  res.status(200).json({
+    status: 'success',
+    data: { destination },
+  });
+});
 
-    const destination = await Destination.findById(id);
+exports.addDestination = catchAsync(async (req, res, next) => {
+  const destination = await Destination.create(req.body);
 
-    res.status(200).json({
-      status: 'success',
-      data: { destination },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
+  res.status(201).json({
+    status: 'success',
+    data: { destination },
+  });
+});
+
+exports.updateDestination = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+
+  const destination = await Destination.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidatoers: true,
+  });
+
+  if (!destination) {
+    const message = `No destination found with id: ${id}`;
+    const statusCode = 404;
+    const error = new AppError(message, statusCode);
+
+    next(error);
+    return;
   }
-};
 
-exports.addDestination = async (req, res) => {
-  try {
-    const destination = await Destination.create(req.body);
+  const updateDestination = await Destination.findById(id);
 
-    res.status(201).json({
-      status: 'success',
-      data: { destination },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
+  res.status(200).json({
+    status: 'success',
+    data: { updateDestination },
+  });
+});
+
+exports.deleteDestination = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+
+  const destination = await Destination.findByIdAndRemove(id);
+
+  if (!destination) {
+    const message = `No destination found with id: ${id}`;
+    const statusCode = 404;
+    const error = new AppError(message, statusCode);
+
+    next(error);
+    return;
   }
-};
 
-exports.updateDestination = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    await Destination.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidatoers: true,
-    });
-
-    const updateDestination = await Destination.findById(id);
-
-    res.status(200).json({
-      status: 'success',
-      data: { updateDestination },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
-
-exports.deleteDestination = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    await Destination.findByIdAndRemove(id);
-
-    res.status(203).json({
-      status: 'success',
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+  res.status(203).json({
+    status: 'success',
+  });
+});
