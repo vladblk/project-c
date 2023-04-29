@@ -28,6 +28,20 @@ const handleDuplicateKeyError = (err) => {
   return error;
 };
 
+const handleJsonWebTokenError = () => {
+  const message = 'Invalid user, please sign in again!';
+  const statusCode = 401;
+  const error = new AppError(message, statusCode);
+  return error;
+};
+
+const handleTokenExpiredError = () => {
+  const message = 'Your session has expired, please sign in again!';
+  const statusCode = 401;
+  const error = new AppError(message, statusCode);
+  return error;
+};
+
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -83,6 +97,14 @@ module.exports = (err, req, res, next) => {
     // handle DuplicateKey error
     if (err.code === 11000 || err.codeName === 'DuplicateKey') {
       errObj = handleDuplicateKeyError(err);
+    }
+
+    if (err.name === 'JsonWebTokenError') {
+      errObj = handleJsonWebTokenError();
+    }
+
+    if (err.name === 'TokenExpiredError') {
+      errObj = handleTokenExpiredError();
     }
 
     sendErrorProd(errObj, res);

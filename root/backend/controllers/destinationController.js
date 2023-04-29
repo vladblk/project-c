@@ -9,7 +9,7 @@ const catchAsync = require('../utils/catchAsync');
 //};
 //};
 
-exports.getAllDestinations = catchAsync(async (req, res) => {
+exports.getAllDestinations = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Destination, req.query)
     .filter()
     .sort()
