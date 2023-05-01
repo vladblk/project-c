@@ -1,7 +1,7 @@
 require('dotenv').config({ path: '../.env' });
 const mongoose = require('mongoose');
 const fs = require('fs');
-const Destination = require('../models/destinationModel');
+const Camp = require('../models/campModel');
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
@@ -10,11 +10,11 @@ const DB = process.env.DATABASE.replace(
 
 mongoose.connect(DB).then(() => console.log('Database connected!'));
 
-const destinations = JSON.parse(fs.readFileSync('./dev-data.json'));
+const camps = JSON.parse(fs.readFileSync('./dev-data.json'));
 
 const importData = async () => {
   try {
-    await Destination.create(destinations);
+    await Camp.create(camps);
   } catch (err) {
     console.log(err);
   }
@@ -22,7 +22,7 @@ const importData = async () => {
 
 const deleteData = async () => {
   try {
-    await Destination.deleteMany();
+    await Camp.deleteMany();
   } catch (err) {
     console.log(err);
   }
@@ -36,4 +36,4 @@ if (process.argv[2] === '--delete') {
   deleteData();
 }
 
-// mongoose.disconnect(DB).then(() => console.log('Database disconnected!'));
+//mongoose.disconnect(DB).then(() => console.log('Database disconnected!'));

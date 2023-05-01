@@ -2,7 +2,7 @@ require('dotenv').config();
 const AppError = require('../utils/appError');
 
 const handleCastError = (err) => {
-  const message = `No destination found with ${err.path}: ${err.value}`;
+  const message = `No camp found with ${err.path}: ${err.value}`;
   const statusCode = 404;
   const error = new AppError(message, statusCode);
   return error;
@@ -22,7 +22,7 @@ const handleValidationError = (err) => {
 };
 
 const handleDuplicateKeyError = (err) => {
-  const message = `A destination with the "${err.keyValue['name']}" name already exists!`;
+  const message = `A camp with the "${err.keyValue['name']}" name already exists!`;
   const statusCode = 400;
   const error = new AppError(message, statusCode);
   return error;

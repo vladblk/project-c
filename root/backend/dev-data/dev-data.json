@@ -9,7 +9,7 @@
     "maxGroupSize": 8,
     "difficulty": "easy",
     "summary": "Explore the stunning Transfagarasan Road, one of the most scenic routes in the world.",
-    "description": "Join us on this 2-day tour of the Transfagarasan Road, a stunning mountain route that winds through the Carpathians. You'll get to see breathtaking views of the mountains, valleys, and forests, and visit attractions like the Vidraru Dam and Balea Lake. This tour is suitable for travelers of all ages and fitness levels.",
+    "description": "Join us on this 2-day camp of the Transfagarasan Road, a stunning mountain route that winds through the Carpathians. You'll get to see breathtaking views of the mountains, valleys, and forests, and visit attractions like the Vidraru Dam and Balea Lake. This camp is suitable for travelers of all ages and fitness levels.",
     "createdAt": "2023-04-13T12:30:00.000Z",
     "startDates": [
       "2023-06-01T00:00:00.000Z",
@@ -28,7 +28,7 @@
     "maxGroupSize": 15,
     "difficulty": "easy",
     "summary": "Visit the famous Bran Castle, also known as Dracula's Castle.",
-    "description": "Join us on this 1-day tour of Bran Castle, one of the most famous landmarks in Romania. You'll get to explore the medieval fortress, learn about its history, and enjoy stunning views of the surrounding area. This tour is suitable for travelers of all ages and fitness levels.",
+    "description": "Join us on this 1-day camp of Bran Castle, one of the most famous landmarks in Romania. You'll get to explore the medieval fortress, learn about its history, and enjoy stunning views of the surrounding area. This camp is suitable for travelers of all ages and fitness levels.",
     "createdAt": "2023-04-14T12:30:00.000Z",
     "startDates": [
       "2023-09-01T00:00:00.000Z",
@@ -45,7 +45,7 @@
     "ratingsQuantity": 6,
     "duration": 3,
     "maxGroupSize": 15,
-    "difficulty": "Moderate",
+    "difficulty": "hard",
     "summary": "Explore the stunning Peles Castle, a masterpiece of architecture!",
     "description": "Peles Castle is a Neo-Renaissance castle in the Carpathian Mountains, near Sinaia, in Prahova County, Romania, on an existing medieval route linking Transylvania and Wallachia, built between 1873 and 1914. Its inauguration was held in 1883. It was constructed for King Carol I.",
     "country": "Romania",

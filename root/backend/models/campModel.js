@@ -1,23 +1,23 @@
 const mongoose = require('mongoose');
 
-const destinationSchema = new mongoose.Schema({
+const campSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'A destination must have a name!'],
+    required: [true, 'A camp must have a name!'],
     unique: true,
     trim: true,
-    maxlength: [40, 'A destination name must have a max of 40 characters!'],
-    minlength: [10, 'A destination name must have a min of 10 characters!'],
+    maxlength: [40, 'A camp name must have a max of 40 characters!'],
+    minlength: [10, 'A camp name must have a min of 10 characters!'],
     validate: {
       validator: function (nameValue) {
         return Boolean(nameValue.match(/^[A-Za-z ]*$/));
       },
-      message: 'A destination name must contain only letters!',
+      message: 'A camp name must contain only letters!',
     },
   },
   price: {
     type: Number,
-    required: [true, 'A tour must have a price'],
+    required: [true, 'A camp must have a price'],
   },
   discount: {
     type: Number,
@@ -38,24 +38,24 @@ const destinationSchema = new mongoose.Schema({
   },
   duration: {
     type: Number,
-    required: [true, 'A tour must have a duration!'],
+    required: [true, 'A camp must have a duration!'],
   },
   maxGroupSize: {
     type: Number,
-    required: [true, 'A tour must have a group size!'],
+    required: [true, 'A camp must have a group size!'],
   },
   difficulty: {
     type: String,
-    required: [true, 'A tour must have a difficulty!'],
+    required: [true, 'A camp must have a difficulty!'],
     enum: {
       values: ['easy', 'medium', 'hard'],
-      message: 'A destination difficulty can be either easy, medium or hard!',
+      message: 'A camp difficulty can be either easy, medium or hard!',
     },
   },
   summary: {
     type: String,
     trim: true,
-    required: [true, 'A tour must have a description!'],
+    required: [true, 'A camp must have a description!'],
   },
   description: {
     type: String,
@@ -70,10 +70,10 @@ const destinationSchema = new mongoose.Schema({
   },
   country: {
     type: String,
-    required: [true, 'A destination must have a country!'],
+    required: [true, 'A camp must have a country!'],
   },
 });
 
-const Destination = mongoose.model('Destination', destinationSchema);
+const Camp = mongoose.model('camp', campSchema);
 
-module.exports = Destination;
+module.exports = Camp;

@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
-const destinationRouter = require('./routes/destinationRoutes');
+const campRouter = require('./routes/campRoutes');
 const userRouter = require('./routes/userRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -49,8 +49,8 @@ app.use(
   })
 );
 
-// mount the destination router as a middleware
-app.use('/api/v1/destinations', destinationRouter);
+// mount the camp router as a middleware
+app.use('/api/v1/camps', campRouter);
 
 // mount the user router as a middleware
 app.use('/api/v1/users', userRouter);
