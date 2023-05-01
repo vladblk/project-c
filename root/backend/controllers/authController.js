@@ -12,6 +12,30 @@ const generateToken = async (id) => {
   });
 };
 
+const createTokenSendResponse = async (user, statusCode, res) => {
+  const jwtToken = await generateToken(user._id);
+
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ), // convert value in JWT_COOKIE_EXPIRES_IN in milliseconds
+    httpOnly: true,
+  };
+
+  // if node_env is production, set "secure: true"
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+  res.cookie('jwt', jwtToken, cookieOptions);
+
+  res.status(statusCode).json({
+    status: 'success',
+    token: jwtToken,
+    data: {
+      user: user,
+    },
+  });
+};
+
 exports.signup = catchAsync(async (req, res, next) => {
   const { name, email, password, passwordConfirm, passwordChangedAt, role } =
     req.body;
@@ -25,15 +49,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     role,
   });
 
-  const jwtToken = await generateToken(newUser._id);
-
-  res.status(201).json({
-    status: 'success',
-    token: jwtToken,
-    data: {
-      user: newUser,
-    },
-  });
+  await createTokenSendResponse(newUser, 201, res);
 });
 
 exports.signin = catchAsync(async (req, res, next) => {
@@ -65,12 +81,7 @@ exports.signin = catchAsync(async (req, res, next) => {
   }
 
   // 4) If everything is good, generate token again and send response to client
-  const jwtToken = await generateToken(user._id);
-
-  res.status(200).json({
-    status: 'success',
-    token: jwtToken,
-  });
+  await createTokenSendResponse(user, 200, res);
 });
 
 exports.protectRoute = catchAsync(async (req, res, next) => {
@@ -205,14 +216,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   await user.save();
 
   // generate a new jasonwebtoken to sign in the user
-  const JWToken = await generateToken(user._id);
-
-  // send response
-  res.status(200).json({
-    status: 'success',
-    message: 'User successfully signed in!',
-    token: JWToken,
-  });
+  await createTokenSendResponse(user, 200, res);
 });
 
 exports.changePassword = catchAsync(async (req, res, next) => {
@@ -250,12 +254,5 @@ exports.changePassword = catchAsync(async (req, res, next) => {
   await user.save();
 
   // 6) generate new jwtoken and send the response
-  const JWToken = await generateToken(user._id);
-
-  res.status(200).json({
-    status: 'success',
-    message: 'You have successfully changed your password!',
-    token: JWToken,
-    data: { user },
-  });
+  await createTokenSendResponse(user, 200, res);
 });
