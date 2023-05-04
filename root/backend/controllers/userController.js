@@ -1,6 +1,7 @@
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
+const factoryFunction = require('./factoryFunction');
 
 const filterBody = (obj, ...allowedFields) => {
   const filteredObj = {};
@@ -13,15 +14,6 @@ const filterBody = (obj, ...allowedFields) => {
 
   return filteredObj;
 };
-
-exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const users = await User.find();
-
-  res.status(200).json({
-    status: 'success',
-    data: { users },
-  });
-});
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   // restrict user to change password from this route
@@ -66,3 +58,17 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
+exports.getUser = factoryFunction.getOne(User, 'user');
+exports.getAllUsers = factoryFunction.getAll(User, 'users');
+exports.updateUser = factoryFunction.updateOne(User, 'user');
+exports.deleteUser = factoryFunction.deleteOne(User, 'user');
+
+//exports.getAllUsers = catchAsync(async (req, res, next) => {
+//const users = await User.find();
+
+//res.status(200).json({
+//status: 'success',
+//data: { users },
+//});
+//});

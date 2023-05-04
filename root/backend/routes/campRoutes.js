@@ -11,7 +11,7 @@ router.use('/:campID/reviews', reviewRouter);
 router
   .route('/')
   .get(authController.protectRoute, campController.getAllCamps)
-  .post(campController.addCamp);
+  .post(campController.createCamp);
 
 router
   .route('/:id')
