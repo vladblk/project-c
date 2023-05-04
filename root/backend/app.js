@@ -6,6 +6,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const campRouter = require('./routes/campRoutes');
 const userRouter = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const app = express();
@@ -54,6 +55,9 @@ app.use('/api/v1/camps', campRouter);
 
 // mount the user router as a middleware
 app.use('/api/v1/users', userRouter);
+
+// mount the review router as a middleware;
+app.use('/api/v1/reviews', reviewRouter);
 
 // handle unhandled routes
 app.all('*', (req, res, next) => {

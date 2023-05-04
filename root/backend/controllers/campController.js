@@ -30,7 +30,7 @@ exports.getAllCamps = catchAsync(async (req, res, next) => {
 exports.getCamp = catchAsync(async (req, res, next) => {
   const { id } = req.params;
 
-  const camp = await Camp.findById(id);
+  const camp = await Camp.findById(id).populate('reviews');
 
   if (!camp) {
     const message = `No camp found with id: ${id}`;
