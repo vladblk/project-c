@@ -10,21 +10,25 @@ router.use('/:campID/reviews', reviewRouter);
 
 router
   .route('/')
-  .get(authController.protectRoute, campController.getAllCamps)
-  .post(campController.createCamp);
+  .get(campController.getAllCamps)
+  .post(
+    authController.protectRoute,
+    authController.restrictTo('admin'),
+    campController.createCamp
+  );
 
 router
   .route('/:id')
   .get(campController.getCamp)
-  .patch(campController.updateCamp)
+  .patch(
+    authController.protectRoute,
+    authController.restrictTo('admin'),
+    campController.updateCamp
+  )
   .delete(
     authController.protectRoute,
     authController.restrictTo('admin'),
     campController.deleteCamp
   );
-
-//router
-//.route('/:campID/reviews')
-//.post(authController.protectRoute, reviewController.addReview);
 
 module.exports = router;

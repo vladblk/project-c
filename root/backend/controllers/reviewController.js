@@ -7,6 +7,8 @@ exports.addCampAndUserIDs = (req, res, next) => {
   if (!req.body.camp) req.body.camp = req.params.campID;
   // if there is no user id specified in posted body, get the user id from currentUser (defined in protect route middleware)
   if (!req.body.user) req.body.user = req.currentUser._id;
+
+  next();
 };
 
 exports.getReview = factoryFunction.getOne(Review, 'review');

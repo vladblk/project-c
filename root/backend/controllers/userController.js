@@ -15,6 +15,11 @@ const filterBody = (obj, ...allowedFields) => {
   return filteredObj;
 };
 
+exports.getMe = (req, res, next) => {
+  req.params.id = req.currentUser._id;
+  next();
+};
+
 exports.updateMe = catchAsync(async (req, res, next) => {
   // restrict user to change password from this route
   const { password, passwordConfirm } = req.body;

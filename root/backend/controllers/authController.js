@@ -204,7 +204,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     return next(error);
   }
 
-  // save the new password to client and remove the poassword reset token
+  // save the new password and remove the password reset token
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   user.passwordResetToken = undefined;

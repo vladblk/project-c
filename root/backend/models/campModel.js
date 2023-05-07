@@ -31,7 +31,10 @@ const campSchema = new mongoose.Schema(
     },
     ratingsAverage: {
       type: Number,
-      default: 4.5,
+      default: 1,
+      min: 1,
+      max: 5,
+      set: (value) => value.toFixed(1),
     },
     ratingsQuantity: {
       type: Number,
@@ -65,9 +68,6 @@ const campSchema = new mongoose.Schema(
     createdAt: {
       type: Date,
       default: () => Date.now(),
-    },
-    startDates: {
-      type: [Date],
     },
     country: {
       type: String,
