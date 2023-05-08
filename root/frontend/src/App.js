@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
-//import CampsPage from './components/CampsPage';
+import AllCamps from './components/AllCamps';
 //import CampDetailPage from './components/CampDetailPage';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" exact element={<HomePage />} />
-          {/* <Route path="/camps" exact component={CampsPage} /> */}
+          <Route path="/camps" exact element={<AllCamps />} />
           {/* <Route path="/camps/:id" component={CampDetailPage} /> */}
         </Routes>
       </div>
