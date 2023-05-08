@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
@@ -10,6 +11,13 @@ const reviewRouter = require('./routes/reviewRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const app = express();
+
+//// set up pug as html template engine
+//app.set('view engine', 'pug');
+//app.set('views', path.join(__dirname, 'views'));
+
+// serving static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // security headers middleware
 app.use(helmet());
@@ -47,6 +55,14 @@ app.use(
       'price',
       'country',
     ],
+  })
+);
+
+//
+app.use('/', (req, res) =>
+  res.status(200).render('base', {
+    camp: 'Camp 1',
+    user: 'user1',
   })
 );
 
