@@ -53,13 +53,14 @@
 .camp-card-button {
   display: block;
   margin: 0 auto;
-  background-color: #28a745;
+  background-color: #66bf60;
   color: #fff;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   font-weight: 700;
   padding: 10px 20px;
+  text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
 

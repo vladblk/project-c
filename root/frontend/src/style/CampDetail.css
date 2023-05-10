@@ -1,0 +1,59 @@
+.camp-detail {
+  max-width: 800px;
+  margin: 10rem auto;
+  padding: 20px;
+}
+
+.camp--detail__name {
+  font-size: 3rem;
+}
+
+.camp--detail__location {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.camp--detail__ratings {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.camp--detail__description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.camp--detail__details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.camp--detail__details p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  flex-basis: 30%;
+}
+
+.camp--detail__details strong {
+  font-weight: bold;
+}
+
+.book-now-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 15px 40px;
+  background-color: #66bf60;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.book-now-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}

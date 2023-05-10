@@ -32,7 +32,9 @@ function AllCamps() {
             <div className="camp-card-content">
               <h2 className="camp-card-title">{camp.name}</h2>
               <p className="camp-card-summary">{camp.summary}</p>
-              <button className="camp-card-button">Camp Details</button>
+              <Link to={`/camps/${camp.id}`} className="camp-card-button">
+                Camp Details
+              </Link>
             </div>
           </div>
         ))}
