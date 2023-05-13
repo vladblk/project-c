@@ -9,10 +9,13 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const app = express();
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-app.use(cors());
+const app = express();
+
+// app.use(cors());
+app.use(cors({ credentials: true, origin: 'http://localhost:3001' }));
 
 // security headers middleware
 app.use(helmet());
@@ -20,7 +23,7 @@ app.use(helmet());
 // limit the api calls
 const apiLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 60 minutes
-  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  max: 1000, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   message: 'Too many requests registered. Please try again later!',
@@ -31,6 +34,7 @@ app.use('/api', apiLimiter);
 
 // parse data from body into req.body middleware
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 // data sanitization against query injections
 app.use(mongoSanitize());
@@ -52,6 +56,23 @@ app.use(
     ],
   })
 );
+
+// testing middleware
+app.use((req, res, next) => {
+  // res.header('Access-Control-Allow-Origin', '*');
+  // res.header('Access-Control-Allow-Credentials', 'true');
+  // res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+  // res.header(
+  //   'Access-Control-Allow-Headers',
+  //   'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+  // );
+
+  console.log('req.cookies: ', req.cookies);
+  console.log('req.headers: ', req.headers);
+  console.log('res.locals: ', res.locals);
+
+  next();
+});
 
 // mount the camp router as a middleware
 app.use('/api/v1/camps', campRouter);

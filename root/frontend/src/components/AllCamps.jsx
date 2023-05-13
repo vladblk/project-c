@@ -10,7 +10,7 @@ function AllCamps() {
 
   useEffect(() => {
     axios
-      .get('http://127.0.0.1:3000/api/v1/camps')
+      .get('http://localhost:3000/api/v1/camps', { withCredentials: true })
       .then((response) => {
         console.log(response);
         setCamps(response.data.data.camps);

@@ -81,12 +81,22 @@ exports.signin = catchAsync(async (req, res, next) => {
   }
 
   // 4) If everything is good, generate token again and send response to client
-  await createTokenSendResponse(user, 200, res);
+  return await createTokenSendResponse(user, 200, res);
+});
+
+exports.signout = catchAsync(async (req, res, next) => {
+  await res.cookie('jwt', 'logOut', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    status: 'success',
+  });
 });
 
 exports.protectRoute = catchAsync(async (req, res, next) => {
   // 1) Get headers and see if token it's there
-  console.log(req.headers);
   let token;
 
   if (
@@ -94,6 +104,8 @@ exports.protectRoute = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies['jwt']) {
+    token = req.cookies['jwt'];
   }
 
   if (!token) {
@@ -132,6 +144,35 @@ exports.protectRoute = catchAsync(async (req, res, next) => {
 
   // If everything ok, gain access to protected route
   req.currentUser = currentUser;
+  next();
+});
+
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  // 1) check if there is a cookie
+  if (req.cookies['jwt']) {
+    // 2) Verify token
+    const decodedPayload = await promisify(jwt.verify)(
+      req.cookies['jwt'],
+      process.env.JWT_SECRET
+    );
+
+    // 3) Check if the user still exists
+    const currentUser = await User.findById(decodedPayload.id);
+
+    if (!currentUser) return next();
+
+    // 4) Check if user changed password after the token was issued
+    const isPasswordChangedAfterTokenIssue =
+      currentUser.isPasswordChangedAfterTokenIssue(decodedPayload.iat);
+
+    if (isPasswordChangedAfterTokenIssue) return next();
+
+    // A user is logged in
+    res.locals.user = currentUser;
+    next();
+  }
+
+  // no cookie, move to the next middleware
   next();
 });
 

@@ -11,12 +11,27 @@ function CampDetail() {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:3000/api/v1/camps/${params.campID}`)
+      .get(`http://localhost:3000/api/v1/camps/${params.campID}`, {
+        withCredentials: true,
+      })
       .then((response) => {
         console.log(response.data);
         setCamp(response.data.data.camp);
       });
   }, [params.campID]);
+
+  useEffect(() => {
+    console.log(document.cookie);
+    // Check if the jwt cookie is present
+    const jwtCookie = document.cookie
+      .split(';')
+      .find((cookie) => cookie.trim().startsWith('jwt='));
+
+    console.log(jwtCookie);
+
+    // Update the login state based on the presence of the cookie
+    // setIsLoggedIn(jwtCookie !== undefined);
+  }, []);
 
   console.log(camp);
 
