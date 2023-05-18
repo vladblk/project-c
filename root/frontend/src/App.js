@@ -4,6 +4,7 @@ import HomePage from './components/HomePage';
 import AllCamps from './components/AllCamps';
 import CampDetail from './components/CampDetail';
 import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/camps" exact element={<AllCamps />} />
           <Route path="/camps/:campID" exact element={<CampDetail />} />
           <Route path="/signin" exact element={<SignIn />} />
+          <Route path="/signup" exact element={<SignUp />} />
         </Routes>
       </div>
     </Router>

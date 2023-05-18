@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import NavBar from './NavBar';
+import ErrorBanner from './ErrorBanner';
 
+import '../style/ErrorBanner.css';
 import '../style/SignIn.css';
 
 function SignIn() {
@@ -11,6 +13,7 @@ function SignIn() {
   const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleEmailChange = (event) => setEmail(event.target.value);
 
@@ -36,6 +39,8 @@ function SignIn() {
       // console.log(cookies);
     } catch (error) {
       console.log(error);
+      setError(`${error.response.data.message}`);
+      return;
     }
 
     navigate('/camps');
@@ -44,8 +49,10 @@ function SignIn() {
   return (
     <>
       <NavBar />
+
       <div className="loginPage">
         <h1 className="loginPage__title">Sign in</h1>
+        {error && <ErrorBanner message={error} />}
         <form className="loginPage__form" onSubmit={handleSubmit}>
           <label className="loginPage__form--email-label">
             Email:

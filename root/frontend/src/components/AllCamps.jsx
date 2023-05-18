@@ -3,22 +3,35 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import NavBar from './NavBar';
 import '../style/AllCamps.css';
+import '../style/Loading.css';
 import '../App.css';
 
 function AllCamps() {
   const [camps, setCamps] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3000/api/v1/camps', { withCredentials: true })
-      .then((response) => {
-        console.log(response);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/v1/camps');
         setCamps(response.data.data.camps);
-      })
-      .catch((error) => {
+        setIsLoading(false);
+      } catch (error) {
         console.log(error);
-      });
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  if (isLoading) {
+    return <div className="loading-animation"></div>;
+  }
+
+  if (!camps) {
+    return <div>No data available.</div>;
+  }
 
   return (
     <>

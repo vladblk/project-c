@@ -40,6 +40,15 @@ exports.signup = catchAsync(async (req, res, next) => {
   const { name, email, password, passwordConfirm, passwordChangedAt, role } =
     req.body;
 
+  const checkEmail = await User.findOne({ email });
+
+  if (checkEmail) {
+    const message = 'An user with this email already exists. Please try again!';
+    const statusCode = 400;
+    const error = new AppError(message, statusCode);
+    return next(error);
+  }
+
   const newUser = await User.create({
     name,
     email,
