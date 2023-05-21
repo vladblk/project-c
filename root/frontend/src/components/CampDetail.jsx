@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 import axios from 'axios';
 import NavBar from './NavBar';
 import '../style/Loading.css';
@@ -10,6 +11,12 @@ function CampDetail() {
   const params = useParams();
   const [camp, setCamp] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [review, setReview] = useState('');
+  const [rating, setRating] = useState(5);
+  const { isLoggedIn } = useAuth();
+
+  const handleReviewTextChange = (event) => setReview(event.target.value);
+  const handleReviewRatingChange = (event) => setRating(event.target.value);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +44,29 @@ function CampDetail() {
   }
 
   console.log(camp);
+  console.log(review);
+  console.log(rating);
+
+  const handleReviewSubmit = async () => {
+    try {
+      const response = await axios.post(
+        `/api/v1/camps/${params.campID}/reviews`,
+        {
+          review: review,
+          rating: rating,
+        }
+      );
+
+      setCamp((prevCamp) => ({
+        ...prevCamp,
+        reviews: [...prevCamp.reviews, response.data.data.review],
+      }));
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -67,14 +97,55 @@ function CampDetail() {
         <button className="book-now-btn">Book Now</button>
         <div className="camp--detail__reviews">
           <h3>Reviews</h3>
+          {isLoggedIn ? (
+            <div className="camp--detail__reviews--add">
+              <label className="addReviewText-label">Leave us a review:</label>
+              <input
+                type="text"
+                className="addReviewText"
+                placeholder="Add a review"
+                value={review}
+                onChange={handleReviewTextChange}
+              />
+              <label className="addReviewRating-label">
+                How satisfied were you?
+                <select
+                  id="rating"
+                  className="addReviewRating"
+                  value={rating}
+                  onChange={handleReviewRatingChange}
+                >
+                  <option value="5" defaultChecked>
+                    5 | Very satisfied
+                  </option>
+                  <option value="4">4 | Pretty satisfied</option>
+                  <option value="3">3 | Satisfied</option>
+                  <option value="2">2 | Not so satisfied</option>
+                  <option value="1">1 | Horrible!</option>
+                </select>
+              </label>
+              <button className="addReviewBtn" onClick={handleReviewSubmit}>
+                Add Review
+              </button>
+            </div>
+          ) : (
+            <div className="camp--detail__reviews-add">
+              <p className="signedInAlert">
+                You need to be signed in to leave a review!
+              </p>
+            </div>
+          )}
           <div className="camp--detail__reviews-list">
-            {camp.reviews.map((review) => (
-              <div key={review.id} className="camp--detail__review">
-                <p className="review-user">Reviewed by: {review.user.name}</p>
-                <p className="review-rating">Rating: {review.rating}</p>
-                <p className="review-text">{review.review}</p>
-              </div>
-            ))}
+            {camp.reviews
+              .slice()
+              .reverse()
+              .map((review) => (
+                <div key={review.id} className="camp--detail__review">
+                  <p className="review-user">Reviewed by: {review.user.name}</p>
+                  <p className="review-rating">Rating: {review.rating}</p>
+                  <p className="review-text">{review.review}</p>
+                </div>
+              ))}
           </div>
         </div>
       </div>

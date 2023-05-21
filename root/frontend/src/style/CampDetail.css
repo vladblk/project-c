@@ -128,7 +128,7 @@
 }
 
 .camp--detail__reviews-list {
-  margin-top: 10px;
+  margin-top: 3rem;
 }
 
 .review-user {
@@ -147,11 +147,46 @@
   font-size: 1.5rem;
 }
 
-.back-button {
+.addReviewText {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 1rem 0;
+}
+
+.addReviewBtn {
+  display: block;
+  margin-top: 1rem;
   background-color: #333;
   color: #fff;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.addReviewBtn:hover {
+  background-color: #66bf60;
+  color: #fff;
+}
+
+.addReviewText-label {
+  display: block;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.addReviewRating-label {
+  font-size: 1.5rem;
+}
+
+.addReviewRating {
+  margin-left: 1rem;
+}
+
+.signedInAlert {
+  font-size: 1.5rem;
+  font-style: italic;
 }
