@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import illustration from '../img/undraw_camping_noc8.png'; // import your illustration image
+import illustration from '../img/hero-image.svg'; // import your illustration image
 import '../style/Hero.css';
 
 function Hero() {
