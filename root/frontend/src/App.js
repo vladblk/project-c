@@ -5,6 +5,7 @@ import AllCamps from './components/AllCamps';
 import CampDetail from './components/CampDetail';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import AllProducts from './components/AllProducts';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/camps/:campID" exact element={<CampDetail />} />
           <Route path="/signin" exact element={<SignIn />} />
           <Route path="/signup" exact element={<SignUp />} />
+          <Route path="/products" exact element={<AllProducts />} />
         </Routes>
       </div>
     </Router>

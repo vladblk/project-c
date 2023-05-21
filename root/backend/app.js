@@ -4,13 +4,14 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const AppError = require('./utils/appError');
 const campRouter = require('./routes/campRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
-const AppError = require('./utils/appError');
+const productRouter = require('./routes/productRoutes');
 const globalErrorHandler = require('./controllers/errorController');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
 
 const app = express();
 
@@ -80,8 +81,11 @@ app.use('/api/v1/camps', campRouter);
 // mount the user router as a middleware
 app.use('/api/v1/users', userRouter);
 
-// mount the review router as a middleware;
+// mount the review router as a middleware
 app.use('/api/v1/reviews', reviewRouter);
+
+// mount the product router as a middleware
+app.use('/api/v1/products', productRouter);
 
 // handle unhandled routes
 app.all('*', (req, res, next) => {

@@ -34,20 +34,24 @@
 }
 
 .camp-card-title {
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: 700;
   margin-bottom: 10px;
 }
 
 .camp-card-location {
-  font-size: 18px;
+  font-size: 1.8rem;
   margin-bottom: 10px;
 }
 
 .camp-card-summary {
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 1.4;
   margin-bottom: 10px;
+}
+
+.camp-card-price {
+  font-size: 1.5rem;
 }
 
 .camp-card-button {

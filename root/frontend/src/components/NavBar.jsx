@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
@@ -16,8 +16,16 @@ function NavBar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo">Campy</div>
+      <a href="/" className="navbar-logo">
+        Campy
+      </a>
       <div className="navbar-buttons">
+        <Link to="/camps">
+          <button className="navbar-button allCampsBtn">All Camps</button>
+        </Link>
+        <Link to="/products">
+          <button className="navbar-button shopBtn">Shop</button>
+        </Link>
         {isLoggedIn ? (
           <>
             <span className="navbar-username">Welcome, {userName}!</span>

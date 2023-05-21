@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Tent",
+    "description": "Spacious 4-person tent with waterproof design",
+    "price": 149.99,
+    "quantity": 10
+  },
+  {
+    "name": "Sleeping Bag",
+    "description": "Mummy-style sleeping bag with thermal insulation",
+    "price": 79.99,
+    "quantity": 15
+  },
+  {
+    "name": "Portable Camping Stove",
+    "description": "Compact and lightweight stove for outdoor cooking",
+    "price": 39.99,
+    "quantity": 8
+  },
+  {
+    "name": "Hiking Backpack",
+    "description": "Durable backpack with multiple compartments and hydration system",
+    "price": 129.99,
+    "quantity": 12
+  },
+  {
+    "name": "Campfire Cooking Set",
+    "description": "Set of cooking utensils and pots for campfire cooking",
+    "price": 49.99,
+    "quantity": 5
+  },
+  {
+    "name": "Camp Chair",
+    "description": "Foldable and comfortable chair for outdoor relaxation",
+    "price": 29.99,
+    "quantity": 20
+  },
+  {
+    "name": "Headlamp",
+    "description": "LED headlamp with adjustable brightness and long battery life",
+    "price": 19.99,
+    "quantity": 25
+  },
+  {
+    "name": "Inflatable Sleeping Pad",
+    "description": "Self-inflating sleeping pad for comfortable sleep outdoors",
+    "price": 59.99,
+    "quantity": 10
+  },
+  {
+    "name": "Portable Camping Shower",
+    "description": "Battery-powered shower for convenient bathing in the wilderness",
+    "price": 69.99,
+    "quantity": 6
+  },
+  {
+    "name": "Camping Hammock",
+    "description": "Lightweight hammock with tree straps for relaxing in nature",
+    "price": 44.99,
+    "quantity": 18
+  }
+]
