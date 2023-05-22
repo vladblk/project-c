@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './AuthContext';
+import { CartProvider } from './CartContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthProvider>
-    <App />
+    <CartProvider>
+      <App />
+    </CartProvider>
   </AuthProvider>
 );
 

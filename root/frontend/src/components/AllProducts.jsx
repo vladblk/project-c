@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../CartContext';
 import axios from 'axios';
 import NavBar from './NavBar';
 import '../App.css';
 import '../style/AllProducts.css';
 
 function AllProducts() {
+  const { addToCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +61,10 @@ function AllProducts() {
                 <button className="product-btn-container-details">
                   Details
                 </button>
-                <button className="product-btn-container-addToCart">
+                <button
+                  className="product-btn-container-addToCart"
+                  onClick={() => handleAddToCart(product)}
+                >
                   Add to cart
                 </button>
               </div>

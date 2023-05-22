@@ -1,0 +1,83 @@
+/* Cart.css */
+
+.cart-container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.cart-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.cart-items {
+  margin-bottom: 16px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.cart-item-details {
+  margin-right: 5rem;
+}
+
+.cart-item-name {
+  font-size: 1.6rem;
+}
+
+.cart-item-price {
+  font-size: 1.6rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-button {
+  background-color: #333;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cart-button:hover {
+  background-color: #555;
+}
+
+.cart-item-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-item-count-number {
+  font-size: 2rem;
+  margin: 0 1rem 0 1rem;
+}
+
+.cart-item-count-increaseBtn,
+.cart-item-count-decreaseBtn {
+  background: none;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.cart-total {
+  font-size: 2rem;
+}

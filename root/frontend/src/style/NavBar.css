@@ -18,6 +18,11 @@
   color: #66bf60;
 }
 
+.navbar-buttons {
+  display: flex;
+  align-items: center;
+}
+
 .navbar-button {
   border: none;
   background: none;
@@ -47,4 +52,23 @@
 .allCampsBtn,
 .shopBtn {
   border: none;
+}
+
+.cartBtn {
+  position: relative;
+}
+
+.cartNotification {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: red;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
 }

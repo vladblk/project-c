@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import { CartContext } from '../CartContext';
 
+import Cart from './Cart';
 import '../style/NavBar.css';
 
 function NavBar() {
   const navigate = useNavigate();
+  const { cart } = useContext(CartContext);
   const { isLoggedIn, logout, userName } = useAuth();
 
   const handleLogOut = () => {
@@ -19,16 +22,24 @@ function NavBar() {
       <a href="/" className="navbar-logo">
         Campy
       </a>
-      <div className="navbar-buttons">
+      <div>
         <Link to="/camps">
           <button className="navbar-button allCampsBtn">All Camps</button>
         </Link>
         <Link to="/products">
           <button className="navbar-button shopBtn">Shop</button>
         </Link>
+      </div>
+      <div className="navbar-buttons">
         {isLoggedIn ? (
           <>
             <span className="navbar-username">Welcome, {userName}!</span>
+            <div className="cartBtn">
+              <Cart />
+              {cart.length > 0 && (
+                <div className="cartNotification">{cart.length}</div>
+              )}
+            </div>
             <button className="navbar-button signOutBtn" onClick={handleLogOut}>
               Sign Out
             </button>

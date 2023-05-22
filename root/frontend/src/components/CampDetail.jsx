@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import { CartContext } from '../CartContext';
 import axios from 'axios';
 import NavBar from './NavBar';
 import '../style/Loading.css';
@@ -14,9 +15,14 @@ function CampDetail() {
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(5);
   const { isLoggedIn } = useAuth();
+  const { addToCart } = useContext(CartContext);
 
   const handleReviewTextChange = (event) => setReview(event.target.value);
   const handleReviewRatingChange = (event) => setRating(event.target.value);
+
+  const handleAddToCart = (camp) => {
+    addToCart(camp);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,7 +100,9 @@ function CampDetail() {
             <strong>Price:</strong> {camp.price} EUR/Night
           </p>
         </div>
-        <button className="book-now-btn">Book Now</button>
+        <button className="book-now-btn" onClick={() => handleAddToCart(camp)}>
+          Book Now
+        </button>
         <div className="camp--detail__reviews">
           <h3>Reviews</h3>
           {isLoggedIn ? (
