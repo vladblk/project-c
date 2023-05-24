@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
+import axios from 'axios';
 import Modal from './Modal';
 import { CartContext } from '../CartContext';
 
 import '../style/Cart.css';
 
 function Cart() {
-  const { cart, increaseQuantity, decreaseQuantity } = useContext(CartContext);
+  const { cart, increaseQuantity, decreaseQuantity, clearCart } =
+    useContext(CartContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCartClick = () => {
@@ -17,7 +19,16 @@ function Cart() {
   };
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.count, 0);
+    return cart
+      .reduce((total, item) => total + item.price * item.count, 0)
+      .toFixed(2);
+  };
+
+  const handleCheckout = async () => {
+    const response = await axios
+      .post('/api/v1/checkout', { items: cart })
+      .then((res) => window.location.assign(res.data.url));
+    console.log(response);
   };
 
   return (
@@ -27,13 +38,22 @@ function Cart() {
       </button>
       {isModalOpen && (
         <Modal closeModal={handleCloseModal}>
-          <h2 className="cart-title">My Cart</h2>
+          <div className="cart-header">
+            <h2 className="cart-title">My Cart</h2>
+            {cart.length > 0 && (
+              <button className="clearCart" onClick={() => clearCart()}>
+                Clean your Cart
+              </button>
+            )}
+          </div>
           <div className="cart-items">
             {cart.map((item) => (
               <div key={item._id} className="cart-item">
                 <div className="cart-item-details">
                   <p className="cart-item-name">{item.name}</p>
-                  <p className="cart-item-price">€{item.price}</p>
+                  <p className="cart-item-price">
+                    €{item.count > 0 && (item.price * item.count).toFixed(2)}
+                  </p>
                 </div>
                 <div className="cart-item-count">
                   <button
@@ -54,7 +74,16 @@ function Cart() {
             ))}
           </div>
           <div className="cart-footer">
-            <p className="cart-total">Total: €{calculateTotal()}</p>
+            {cart.length > 0 ? (
+              <>
+                <p className="cart-total">Total: €{calculateTotal()}</p>
+                <button className="checkoutBtn" onClick={handleCheckout}>
+                  Checkout
+                </button>
+              </>
+            ) : (
+              <p className="emptyCartNotif">Your cart is empty</p>
+            )}
           </div>
         </Modal>
       )}

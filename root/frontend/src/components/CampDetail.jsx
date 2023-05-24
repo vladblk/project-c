@@ -101,7 +101,7 @@ function CampDetail() {
           </p>
         </div>
         <button className="book-now-btn" onClick={() => handleAddToCart(camp)}>
-          Book Now
+          Add to cart
         </button>
         <div className="camp--detail__reviews">
           <h3>Reviews</h3>

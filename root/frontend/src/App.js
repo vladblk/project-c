@@ -6,6 +6,8 @@ import CampDetail from './components/CampDetail';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import AllProducts from './components/AllProducts';
+import PaymentSuccess from './components/PaymentSuccess';
+import PaymentCancel from './components/PaymentCancel';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="/signin" exact element={<SignIn />} />
           <Route path="/signup" exact element={<SignUp />} />
           <Route path="/products" exact element={<AllProducts />} />
+          <Route path="/success" exact element={<PaymentSuccess />} />
+          <Route path="/cancel" exact element={<PaymentCancel />} />
         </Routes>
       </div>
     </Router>

@@ -11,6 +11,7 @@ const campRouter = require('./routes/campRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const productRouter = require('./routes/productRoutes');
+const checkoutRouter = require('./routes/checkoutRoutes');
 const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
@@ -86,6 +87,8 @@ app.use('/api/v1/reviews', reviewRouter);
 
 // mount the product router as a middleware
 app.use('/api/v1/products', productRouter);
+
+app.use('/api/v1/checkout', checkoutRouter);
 
 // handle unhandled routes
 app.all('*', (req, res, next) => {
