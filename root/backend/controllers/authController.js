@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-const sendEmail = require('../utils/email');
+const Email = require('../utils/email');
 const crypto = require('crypto');
 
 const generateToken = async (id) => {
@@ -58,6 +58,8 @@ exports.signup = catchAsync(async (req, res, next) => {
     role,
   });
 
+  await new Email(newUser, 'http://localhost:3001/').sendWelcomeEmail();
+
   await createTokenSendResponse(newUser, 201, res);
 });
 
@@ -90,7 +92,7 @@ exports.signin = catchAsync(async (req, res, next) => {
   }
 
   // 4) If everything is good, generate token again and send response to client
-  return await createTokenSendResponse(user, 200, res);
+  await createTokenSendResponse(user, 200, res);
 });
 
 exports.signout = catchAsync(async (req, res, next) => {
@@ -178,7 +180,6 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
 
     // A user is logged in
     res.locals.user = currentUser;
-    next();
   }
 
   // no cookie, move to the next middleware
@@ -216,22 +217,31 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // save the token and the expiration from createPasswordResetToken method to the user
   await user.save({ validateBeforeSave: false });
 
-  // send the token to user email
-  const resetPasswordURL = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/users/forgotPassword/${resetPasswordToken}`;
+  try {
+    // send the token to user email
+    // const resetPasswordURL = `${req.protocol}://${req.get(
+    //   'host'
+    // )}/api/v1/users/resetPassword/${resetPasswordToken}`;
 
-  await sendEmail({
-    email: user.email,
-    subject: 'Your password reset link.',
-    message: `Hello! Here is your password reset link: ${resetPasswordURL}. If you did not request a password reset recently, please ignore this message!`,
-  });
+    const resetPasswordURL = `http://localhost:3001/resetPassword/${resetPasswordToken}`;
 
-  // send response
-  res.status(200).json({
-    status: 'success',
-    message: 'Reset password token sent correctly!',
-  });
+    await new Email(user, resetPasswordURL).sendResetPasswordEmail();
+
+    // send response
+    res.status(200).json({
+      status: 'success',
+      message: 'Reset password token sent correctly!',
+    });
+  } catch (error) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+
+    return next(
+      new AppError('There was an error sending the email. Try again later!'),
+      500
+    );
+  }
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {

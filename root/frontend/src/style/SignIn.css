@@ -62,9 +62,11 @@
   cursor: pointer;
 }
 
-.loginPage__form--cancelBtn {
+.loginPage__form--cancelBtn,
+.loginPage__form--forgotPassword {
   text-decoration: none;
   color: #000;
   font-size: 1.5rem;
   margin-top: 1rem;
+  cursor: pointer;
 }

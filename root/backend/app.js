@@ -16,6 +16,9 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
 
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
 // app.use(cors());
 app.use(cors({ credentials: true, origin: 'http://localhost:3001' }));
 
