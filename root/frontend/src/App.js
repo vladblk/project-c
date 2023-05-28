@@ -9,6 +9,7 @@ import AllProducts from './components/AllProducts';
 import PaymentSuccess from './components/PaymentSuccess';
 import PaymentCancel from './components/PaymentCancel';
 import ResetPassword from './components/ResetPassword';
+import MyPage from './components/MyPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             exact
             element={<ResetPassword />}
           />
+          <Route path="/me" exact element={<MyPage />} />
         </Routes>
       </div>
     </Router>
