@@ -26,7 +26,11 @@ function AllCamps() {
   }, []);
 
   if (isLoading) {
-    return <div className="loading-animation"></div>;
+    return (
+      <div className="loading-overlay">
+        <div className="loading-animation"></div>
+      </div>
+    );
   }
 
   if (!camps) {
