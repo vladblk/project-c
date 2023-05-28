@@ -39,7 +39,7 @@ function SignUp() {
           withCredentials: true,
         }
       );
-      login(response.data.data.user.name);
+      login(response.data.data.user);
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -96,7 +96,7 @@ function SignUp() {
           </label>
           <br />
           <button className="signupPage__form--submitBtn" type="submit">
-            Sign in
+            Sign up
           </button>
           <Link className="signupPage__form--cancelBtn" to="/">
             Cancel

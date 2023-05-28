@@ -35,7 +35,7 @@ function SignIn() {
           withCredentials: true,
         }
       );
-      login(response.data.data.user.name);
+      login(response.data.data.user);
       console.log(response);
       // console.log(cookies);
     } catch (error) {

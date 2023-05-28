@@ -14,7 +14,7 @@ function CampDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(5);
-  const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
   const { addToCart } = useContext(CartContext);
 
   const handleReviewTextChange = (event) => setReview(event.target.value);
@@ -42,7 +42,11 @@ function CampDetail() {
   }, [params.campID]);
 
   if (isLoading) {
-    return <div className="loading-animation"></div>;
+    return (
+      <div className="loading-overlay">
+        <div className="loading-animation"></div>
+      </div>
+    );
   }
 
   if (!camp) {
@@ -105,7 +109,7 @@ function CampDetail() {
         </button>
         <div className="camp--detail__reviews">
           <h3>Reviews</h3>
-          {isLoggedIn ? (
+          {user.isLoggedIn ? (
             <div className="camp--detail__reviews--add">
               <label className="addReviewText-label">Leave us a review:</label>
               <input
@@ -148,8 +152,8 @@ function CampDetail() {
               .slice()
               .reverse()
               .map((review) => (
-                <div key={review.id} className="camp--detail__review">
-                  <p className="review-user">Reviewed by: {review.user.name}</p>
+                <div key={review._id} className="camp--detail__review">
+                  <p className="review-user">Reviewed by: {user.name}</p>
                   <p className="review-rating">Rating: {review.rating}</p>
                   <p className="review-text">{review.review}</p>
                 </div>
