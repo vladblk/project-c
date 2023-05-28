@@ -14,7 +14,6 @@ function ResetPassword() {
   const { login } = useAuth();
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
   const handlePasswordChange = (event) => setPassword(event.target.value);
@@ -32,22 +31,16 @@ function ResetPassword() {
           passwordConfirm: passwordConfirm,
         }
       );
-      login(response.data.data.user.name);
-      setIsLoading(false);
       console.log(response);
+      login(response.data.data.user);
     } catch (error) {
       console.log(error);
       setError(`${error.response.data.message}`);
-      setIsLoading(false);
       return;
     }
 
     navigate('/camps');
   };
-
-  if (isLoading) {
-    return <div className="loading-animation"></div>;
-  }
 
   return (
     <>
