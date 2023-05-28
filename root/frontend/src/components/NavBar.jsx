@@ -10,7 +10,7 @@ import '../style/NavBar.css';
 function NavBar() {
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
-  const { user, logout, userName } = useAuth();
+  const { user, logout } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleDropdownToggle = () => {
