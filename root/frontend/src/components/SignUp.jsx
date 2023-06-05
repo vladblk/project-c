@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
+// import { useAuth } from '../AuthContext';
 import axios from 'axios';
 import NavBar from './NavBar';
 import ErrorBanner from './ErrorBanner';
@@ -10,7 +10,7 @@ import '../style/ErrorBanner.css';
 
 function SignUp() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  // const { login } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,7 +39,7 @@ function SignUp() {
           withCredentials: true,
         }
       );
-      login(response.data.data.user);
+      // login(response.data.data.user);
       console.log(response);
     } catch (error) {
       console.log(error);

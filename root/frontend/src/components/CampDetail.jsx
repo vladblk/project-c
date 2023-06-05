@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
+import { AuthContext, useAuth } from '../AuthContext';
 import { CartContext } from '../CartContext';
 import axios from 'axios';
 import NavBar from './NavBar';
@@ -14,7 +14,7 @@ function CampDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(5);
-  const { user } = useAuth();
+  const { user } = useContext(AuthContext);
   const { addToCart } = useContext(CartContext);
 
   const handleReviewTextChange = (event) => setReview(event.target.value);
@@ -153,7 +153,10 @@ function CampDetail() {
               .reverse()
               .map((review) => (
                 <div key={review._id} className="camp--detail__review">
-                  <p className="review-user">Reviewed by: {user.name}</p>
+                  <p className="review-user">
+                    Reviewed by:{' '}
+                    {review.user.name ? review.user.name : user.name}
+                  </p>
                   <p className="review-rating">Rating: {review.rating}</p>
                   <p className="review-text">{review.review}</p>
                 </div>

@@ -45,6 +45,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  isLoggedIn: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 userSchema.pre('save', async function (next) {

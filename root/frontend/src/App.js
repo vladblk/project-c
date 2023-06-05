@@ -13,8 +13,8 @@ import MyPage from './components/MyPage';
 
 function App() {
   return (
-    <Router>
-      <div className="App">
+    <div className="App">
+      <Router>
         <Routes>
           <Route path="/" exact element={<HomePage />} />
           <Route path="/camps" exact element={<AllCamps />} />
@@ -31,8 +31,8 @@ function App() {
           />
           <Route path="/me" exact element={<MyPage />} />
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </div>
   );
 }
 

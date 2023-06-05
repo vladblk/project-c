@@ -19,7 +19,7 @@ const createTokenSendResponse = async (user, statusCode, res) => {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ), // convert value in JWT_COOKIE_EXPIRES_IN in milliseconds
-    httpOnly: true,
+    httpOnly: false,
   };
 
   // if node_env is production, set "secure: true"
@@ -37,8 +37,15 @@ const createTokenSendResponse = async (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-  const { name, email, password, passwordConfirm, passwordChangedAt, role } =
-    req.body;
+  const {
+    name,
+    email,
+    password,
+    passwordConfirm,
+    passwordChangedAt,
+    role,
+    isLoggedIn,
+  } = req.body;
 
   const checkEmail = await User.findOne({ email });
 
@@ -56,6 +63,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm,
     passwordChangedAt,
     role,
+    isLoggedIn,
   });
 
   await new Email(newUser, 'http://localhost:3001/').sendWelcomeEmail();
@@ -80,8 +88,11 @@ exports.signin = catchAsync(async (req, res, next) => {
   // if user exists, compare the typed password at signin with user password at signin
   let isPasswordCorrect;
 
-  if (user)
+  if (user) {
     isPasswordCorrect = await user.isPasswordCorrect(password, user.password);
+    user.isLoggedIn = true;
+    await user.save({ validateBeforeSave: false });
+  }
 
   // 3) Check if email and password are valid
   if (!user || !isPasswordCorrect) {
@@ -96,8 +107,27 @@ exports.signin = catchAsync(async (req, res, next) => {
 });
 
 exports.signout = catchAsync(async (req, res, next) => {
+  // 1) check if there is a cookie
+  if (req.cookies['jwt']) {
+    // 2) Verify token
+    const decodedPayload = await promisify(jwt.verify)(
+      req.cookies['jwt'],
+      process.env.JWT_SECRET
+    );
+
+    // 3) Check if the user still exists
+    const user = await User.findById(decodedPayload.id);
+
+    if (!user) return next();
+
+    if (user) {
+      user.isLoggedIn = false;
+      await user.save({ validateBeforeSave: false });
+    }
+  }
+
   await res.cookie('jwt', 'logOut', {
-    expires: new Date(Date.now() + 1 * 1000),
+    expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
 

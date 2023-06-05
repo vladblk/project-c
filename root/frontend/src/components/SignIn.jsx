@@ -1,17 +1,18 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
+// import { useAuth } from '../AuthContext';
 import NavBar from './NavBar';
 import ErrorBanner from './ErrorBanner';
 import ForgotPasswordModal from './ForgotPasswordModal';
+import { AuthContext } from '../AuthContext';
 
 import '../style/ErrorBanner.css';
 import '../style/SignIn.css';
 
 function SignIn() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { setUser } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,7 +23,6 @@ function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Email: ${email} | Password: ${password}`);
 
     try {
       const response = await axios.post(
@@ -35,9 +35,9 @@ function SignIn() {
           withCredentials: true,
         }
       );
-      login(response.data.data.user);
       console.log(response);
-      // console.log(cookies);
+      setUser(response.data.data.user);
+      navigate('/camps');
     } catch (error) {
       console.log(error);
       setError(`${error.response.data.message}`);

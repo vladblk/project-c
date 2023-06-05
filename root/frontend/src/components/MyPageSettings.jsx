@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import axios from 'axios';
 import ErrorBanner from './ErrorBanner';
+import { AuthContext } from '../AuthContext';
 
 function MyPageSettings() {
   const navigate = useNavigate();
-  const { login, logout } = useAuth();
+  // const { login, logout } = useAuth();
+  const { logout } = useContext(AuthContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [passwordCurrent, setPasswordCurrent] = useState('');
@@ -35,7 +37,7 @@ function MyPageSettings() {
       console.log(response);
 
       if (response.status === 200) {
-        login(response.data.data.user.updatedUser);
+        // login(response.data.data.user.updatedUser);
         setName('');
         setEmail('');
       }
