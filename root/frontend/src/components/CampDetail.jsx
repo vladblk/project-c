@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { AuthContext, useAuth } from '../AuthContext';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../AuthContext';
 import { CartContext } from '../CartContext';
+import { FaTrashAlt } from 'react-icons/fa';
 import axios from 'axios';
 import NavBar from './NavBar';
 import '../style/Loading.css';
@@ -9,6 +10,7 @@ import '../style/CampDetail.css';
 import '../App.css';
 
 function CampDetail() {
+  const navigate = useNavigate();
   const params = useParams();
   const [camp, setCamp] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +18,9 @@ function CampDetail() {
   const [rating, setRating] = useState(5);
   const { user } = useContext(AuthContext);
   const { addToCart } = useContext(CartContext);
+  const [reviewsCount, setReviewsCount] = useState('');
+
+  console.log(`Reviews count: ${reviewsCount}`);
 
   const handleReviewTextChange = (event) => setReview(event.target.value);
   const handleReviewRatingChange = (event) => setRating(event.target.value);
@@ -31,6 +36,7 @@ function CampDetail() {
           `http://localhost:3000/api/v1/camps/${params.campID}`
         );
         setCamp(response.data.data.camp);
+        // setReviewsCount(response.data.data.camp.reviews.length);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -39,7 +45,7 @@ function CampDetail() {
     };
 
     fetchData();
-  }, [params.campID]);
+  }, [params.campID, reviewsCount]);
 
   if (isLoading) {
     return (
@@ -78,6 +84,25 @@ function CampDetail() {
     }
   };
 
+  const handleDeleteCamp = async () => {
+    try {
+      await axios.delete(`/api/v1/camps/${params.campID}`);
+      navigate('/camps');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDeleteReview = async (reviewID) => {
+    try {
+      await axios.delete(`/api/v1/reviews/${reviewID}`);
+      setReviewsCount(camp.reviews.length);
+      console.log(reviewsCount);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <NavBar />
@@ -104,9 +129,19 @@ function CampDetail() {
             <strong>Price:</strong> {camp.price} EUR/Night
           </p>
         </div>
-        <button className="book-now-btn" onClick={() => handleAddToCart(camp)}>
-          Add to cart
-        </button>
+        <div className="btn-container">
+          <button
+            className="book-now-btn"
+            onClick={() => handleAddToCart(camp)}
+          >
+            Add to cart
+          </button>
+          {user.role === 'admin' && (
+            <button className="deleteCampBtn" onClick={handleDeleteCamp}>
+              Delete Camp
+            </button>
+          )}
+        </div>
         <div className="camp--detail__reviews">
           <h3>Reviews</h3>
           {user.isLoggedIn ? (
@@ -136,9 +171,11 @@ function CampDetail() {
                   <option value="1">1 | Horrible!</option>
                 </select>
               </label>
-              <button className="addReviewBtn" onClick={handleReviewSubmit}>
-                Add Review
-              </button>
+              <div>
+                <button className="addReviewBtn" onClick={handleReviewSubmit}>
+                  Add Review
+                </button>
+              </div>
             </div>
           ) : (
             <div className="camp--detail__reviews-add">
@@ -159,6 +196,18 @@ function CampDetail() {
                   </p>
                   <p className="review-rating">Rating: {review.rating}</p>
                   <p className="review-text">{review.review}</p>
+                  {user.role === 'admin' && (
+                    <FaTrashAlt
+                      onClick={() => handleDeleteReview(review._id)}
+                      className="delete-review-btn"
+                    />
+                  )}
+                  {review.user._id === user._id && (
+                    <FaTrashAlt
+                      onClick={() => handleDeleteReview(review._id)}
+                      className="delete-review-btn"
+                    />
+                  )}
                 </div>
               ))}
           </div>

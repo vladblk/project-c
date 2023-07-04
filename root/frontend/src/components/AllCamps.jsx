@@ -50,9 +50,11 @@ function AllCamps() {
               <h2 className="camp-card-title">{camp.name}</h2>
               <p className="camp-card-summary">{camp.summary}</p>
               <p className="camp-card-price">{camp.price} EUR/night</p>
-              <Link to={`/camps/${camp.id}`} className="camp-card-button">
-                Camp Details
-              </Link>
+              <div className="camp-card-btns">
+                <Link to={`/camps/${camp.id}`} className="camp-card-button">
+                  Camp Details
+                </Link>
+              </div>
             </div>
           </div>
         ))}
