@@ -20,8 +20,8 @@ export const AuthProvider = ({ children }) => {
       try {
         // Decode the JWT
         const decodedToken = jwt_decode(token);
+        console.log(decodedToken);
         setUser(decodedToken);
-        // setLoggedIn(true);
       } catch (error) {
         console.log('Error decoding the JWT:', error);
       }

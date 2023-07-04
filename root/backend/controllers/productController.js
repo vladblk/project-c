@@ -3,3 +3,5 @@ const factoryFunction = require('./factoryFunction');
 
 exports.getAllProducts = factoryFunction.getAll(Product, 'products');
 exports.getProduct = factoryFunction.getOne(Product, 'product');
+exports.addProduct = factoryFunction.createOne(Product);
+exports.updateProduct = factoryFunction.updateOne(Product, 'product');
