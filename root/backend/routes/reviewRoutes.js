@@ -1,8 +1,17 @@
 const express = require('express');
 const reviewController = require('../controllers/reviewController');
 const authController = require('../controllers/authController');
+const reportController = require('../controllers/reportController');
 
 const router = express.Router({ mergeParams: true }); // mergeParams: true -> review router has access to params from camp router
+
+router
+  .route('/reviews-report')
+  .get(
+    authController.protectRoute,
+    authController.restrictTo('admin'),
+    reportController.allReviewsReport
+  );
 
 router
   .route('/')

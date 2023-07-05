@@ -1,8 +1,17 @@
 const express = require('express');
 const productController = require('../controllers/productController');
 const authController = require('../controllers/authController');
+const reportController = require('../controllers/reportController');
 
 const router = express.Router();
+
+router
+  .route('/products-report')
+  .get(
+    authController.protectRoute,
+    authController.restrictTo('admin'),
+    reportController.allProductsReport
+  );
 
 router
   .route('/')

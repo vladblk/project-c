@@ -1,11 +1,20 @@
 const express = require('express');
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
+const reportController = require('../controllers/reportController');
 
 // initiate router
 const router = express.Router();
 
 router.use(authController.isLoggedIn);
+
+router
+  .route('/users-report')
+  .get(
+    authController.protectRoute,
+    authController.restrictTo('admin'),
+    reportController.allUsersReport
+  );
 
 //
 router.post('/signup', authController.signup);
