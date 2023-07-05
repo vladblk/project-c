@@ -4,6 +4,7 @@ const Product = require('../models/productModel');
 const Review = require('../models/reviewModel');
 const catchAsync = require('../utils/catchAsync');
 const ExcelJS = require('exceljs');
+const ProductReview = require('../models/productReviewModel');
 
 // All users report
 exports.allUsersReport = catchAsync(async (req, res, next) => {
@@ -182,14 +183,16 @@ exports.allProductsReport = catchAsync(async (req, res, next) => {
 exports.allReviewsReport = catchAsync(async (req, res, next) => {
   try {
     // Fetch all users from the database
-    const reviews = await Review.find();
+    const campReviews = await Review.find();
+    const productReviews = await ProductReview.find();
 
     // Create a new workbook and worksheet
     const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Reviews');
+    const campReviewsWorksheet = workbook.addWorksheet('Camps Reviews');
+    const productReviewsWorksheet = workbook.addWorksheet('Products Reviews');
 
     // Define the column headers
-    worksheet.columns = [
+    campReviewsWorksheet.columns = [
       { header: 'Review', key: 'review', width: 60 },
       { header: 'Rating', key: 'rating', width: 10 },
       { header: 'Created', key: 'createdAt', width: 10 },
@@ -198,14 +201,33 @@ exports.allReviewsReport = catchAsync(async (req, res, next) => {
       // Add more columns as needed
     ];
 
+    productReviewsWorksheet.columns = [
+      { header: 'Review', key: 'review', width: 60 },
+      { header: 'Rating', key: 'rating', width: 10 },
+      { header: 'Created', key: 'createdAt', width: 10 },
+      { header: 'Product', key: 'product', width: 20 },
+      { header: 'User', key: 'user', width: 20 },
+      // Add more columns as needed
+    ];
+
     // Populate the rows with user data
-    reviews.forEach((review) => {
-      worksheet.addRow({
+    campReviews.forEach((review) => {
+      campReviewsWorksheet.addRow({
         review: review.review,
         rating: review.rating,
         createdAt: review.createdAt,
-        camp: review.camp,
-        user: review.user,
+        camp: review.camp.name,
+        user: review.user.name,
+      });
+    });
+
+    productReviews.forEach((review) => {
+      productReviewsWorksheet.addRow({
+        review: review.review,
+        rating: review.rating,
+        createdAt: review.createdAt,
+        product: review.product.name,
+        user: review.user.name,
       });
     });
 

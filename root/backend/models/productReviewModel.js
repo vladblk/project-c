@@ -40,6 +40,9 @@ productReviewSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
     select: 'name',
+  }).populate({
+    path: 'product',
+    select: 'name',
   });
 
   next();

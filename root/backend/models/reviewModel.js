@@ -40,6 +40,9 @@ reviewSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
     select: 'name',
+  }).populate({
+    path: 'camp',
+    select: 'name',
   });
 
   next();
