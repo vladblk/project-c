@@ -5,6 +5,7 @@ import MyAdminPageAddCamp from './MyAdminPageAddCamp';
 import MyAdminPageEditCamp from './MyAdminPageEditCamp';
 import MyAdminPageAddProduct from './MyAdminPageAddProduct';
 import MyAdminPageEditProduct from './MyAdminPageEditProduct';
+import MyAdminPageReports from './MyAdminPageReports';
 import { AuthContext } from '../AuthContext';
 
 import '../style/MyPage.css';
@@ -57,6 +58,12 @@ function MyPage() {
                 >
                   Edit Product
                 </li>
+                <li
+                  className={activeItem === 'admin-reports' ? 'active' : ''}
+                  onClick={() => handleItemClick('admin-reports')}
+                >
+                  Reports
+                </li>
               </>
             )}
             {/* Add more menu items here */}
@@ -68,6 +75,7 @@ function MyPage() {
           {activeItem === 'admin-edit-camp' && <MyAdminPageEditCamp />}
           {activeItem === 'admin-add-product' && <MyAdminPageAddProduct />}
           {activeItem === 'admin-edit-product' && <MyAdminPageEditProduct />}
+          {activeItem === 'admin-reports' && <MyAdminPageReports />}
           {/* Add more sections/components for other menu items */}
         </div>
       </div>

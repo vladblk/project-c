@@ -1,0 +1,25 @@
+.report-generator {
+  text-align: center;
+  padding: 20px;
+}
+
+.report-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button {
+  background-color: #f2f2f2;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e2e2e2;
+}
