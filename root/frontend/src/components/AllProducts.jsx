@@ -62,9 +62,12 @@ function AllProducts() {
             <div className="product-card-footer">
               <p className="product-price">€{product.price}</p>
               <div className="product-btn-container">
-                <button className="product-btn-container-details">
+                <Link
+                  to={`/products/${product._id}`}
+                  className="product-btn-container-details"
+                >
                   Details
-                </button>
+                </Link>
                 <button
                   className="product-btn-container-addToCart"
                   onClick={() => handleAddToCart(product)}

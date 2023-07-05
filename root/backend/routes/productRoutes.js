@@ -2,8 +2,12 @@ const express = require('express');
 const productController = require('../controllers/productController');
 const authController = require('../controllers/authController');
 const reportController = require('../controllers/reportController');
+const productReviewRouter = require('./productReviewRoutes');
 
 const router = express.Router();
+
+// nested route with productReviewRouter
+router.use('/:productID/reviews', productReviewRouter);
 
 router
   .route('/products-report')
@@ -29,6 +33,11 @@ router
     authController.protectRoute,
     authController.restrictTo('admin'),
     productController.updateProduct
+  )
+  .delete(
+    authController.protectRoute,
+    authController.restrictTo('admin'),
+    productController.deleteProduct
   );
 
 module.exports = router;

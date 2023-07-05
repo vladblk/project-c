@@ -1,0 +1,174 @@
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.book-now-btn,
+.deleteProductBtn {
+  display: block;
+  margin: 0 auto;
+  padding: 15px 40px;
+  background-color: #66bf60;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 1.5rem;
+}
+
+.book-now-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.deleteProductBtn {
+  background-color: red;
+}
+
+.product--detail {
+  max-width: 800px;
+  margin: 5rem auto;
+  padding: 40px;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product--detail__name {
+  font-size: 4rem;
+  margin-bottom: 10px;
+}
+
+.location {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.product--detail__ratings {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.rating-quantity {
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.rating-average {
+  font-size: 16px;
+  color: #666;
+}
+
+.product--detail__description {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.product--detail__details {
+  font-size: 1.5rem;
+}
+
+.product--detail__details p {
+  margin-bottom: 10px;
+}
+
+.product--detail__reviews {
+  margin-top: 40px;
+}
+
+.product--detail__reviews h3 {
+  font-size: 2rem;
+}
+
+.product--detail__review {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.product--detail__reviews-list {
+  margin-top: 3rem;
+}
+
+.review-user {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.review-rating {
+  color: #666;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.review-text {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+}
+
+.addReviewText {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 1rem 0;
+}
+
+.addReviewBtn {
+  display: block;
+  margin-top: 1rem;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.addReviewBtn:hover {
+  background-color: #66bf60;
+  color: #fff;
+}
+
+.addReviewText-label {
+  display: block;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.addReviewRating-label {
+  font-size: 1.5rem;
+}
+
+.addReviewRating {
+  margin-left: 1rem;
+}
+
+.signedInAlert {
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+.delete-review-btn {
+  font-size: 2.5rem;
+  position: absolute;
+  right: 2rem;
+  top: 3.3rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.delete-review-btn:hover {
+  color: red;
+}

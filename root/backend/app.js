@@ -10,6 +10,7 @@ const AppError = require('./utils/appError');
 const campRouter = require('./routes/campRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const productReviewRouter = require('./routes/productReviewRoutes');
 const productRouter = require('./routes/productRoutes');
 const checkoutRouter = require('./routes/checkoutRoutes');
 const globalErrorHandler = require('./controllers/errorController');
@@ -87,6 +88,9 @@ app.use('/api/v1/users', userRouter);
 
 // mount the review router as a middleware
 app.use('/api/v1/reviews', reviewRouter);
+
+// mount the product review router as a middleware
+app.use('/api/v1/productReviews', productReviewRouter);
 
 // mount the product router as a middleware
 app.use('/api/v1/products', productRouter);

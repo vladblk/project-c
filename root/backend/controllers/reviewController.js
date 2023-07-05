@@ -20,16 +20,3 @@ exports.createReview = factoryFunction.createOne(Review, 'review');
 exports.updateReview = factoryFunction.updateOne(Review, 'review');
 
 exports.deleteReview = factoryFunction.deleteOne(Review, 'review');
-
-//exports.getAllReviews = catchAsync(async (req, res, next) => {
-//const { campID } = req.params;
-//let filter = {};
-//if (campID) filter = { camp: campID };
-
-//const reviews = await Review.find(filter);
-
-//res.status(200).json({
-//status: 'success',
-//data: { reviews },
-//});
-//});
