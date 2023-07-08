@@ -1,0 +1,48 @@
+.features-section {
+    padding: 8rem 0;
+  }
+  
+  .section-title {
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .feature {
+    width: 50rem;
+    padding: 2rem;
+    margin: 2rem;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .feature:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature-icon svg {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 2rem;
+    color: #66bf60;
+  }
+  
+  .feature-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .feature-description {
+    font-size: 1.6rem;
+    color: #666;
+  }
+  
