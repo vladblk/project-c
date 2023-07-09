@@ -63,7 +63,24 @@ function AllProducts() {
             </div>
 
             <div className="product-card-footer">
-              <p className="product-price">€{product.price}</p>
+              {product.discount > 0 ? (
+                <p className="product-price">
+                  <strong>Price:</strong>{' '}
+                  <span className="old-price">{product.price} €</span>
+                  <span className="new-price">
+                    {' '}
+                    {(
+                      product.price -
+                      product.price * (product.discount / 100)
+                    ).toFixed(2)}{' '}
+                    €
+                  </span>
+                </p>
+              ) : (
+                <p className="product-price">
+                  <strong>Price:</strong> {product.price} €
+                </p>
+              )}
               <div className="product-btn-container">
                 <Link
                   to={`/products/${product._id}`}

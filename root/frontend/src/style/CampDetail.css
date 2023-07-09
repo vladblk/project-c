@@ -216,3 +216,7 @@
 .delete-review-btn:hover {
   color: red;
 }
+
+.old-price {
+  text-decoration: line-through;
+}

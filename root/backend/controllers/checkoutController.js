@@ -14,7 +14,9 @@ exports.checkout = catchAsync(async (req, res, next) => {
             name: item.name,
             description: item.description,
           },
-          unit_amount: Math.round(item.price * 100),
+          unit_amount: Math.round(
+            (item.price - item.price * (item.discount / 100)) * 100
+          ),
         },
         quantity: item.count,
       };

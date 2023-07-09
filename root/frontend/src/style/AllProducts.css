@@ -38,6 +38,12 @@
 
 .product-price {
   font-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.old-price {
+  font-size: 1.2rem;
 }
 
 .product-btn-container-details,

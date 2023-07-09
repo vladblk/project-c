@@ -126,9 +126,23 @@ function CampDetail() {
           <p>
             <strong>Duration:</strong> {camp.duration} days
           </p>
-          <p>
-            <strong>Price:</strong> {camp.price} EUR/Night
-          </p>
+          {camp.discount > 0 ? (
+            <p>
+              <strong>Price:</strong>{' '}
+              <span className="old-price">{camp.price} EUR/Night</span>
+              <span className="new-price">
+                {' '}
+                {(camp.price - camp.price * (camp.discount / 100)).toFixed(
+                  2
+                )}{' '}
+                EUR/Night - {camp.discount}% Discount!
+              </span>
+            </p>
+          ) : (
+            <p>
+              <strong>Price:</strong> {camp.price} EUR/Night
+            </p>
+          )}
         </div>
         <div className="btn-container">
           <button

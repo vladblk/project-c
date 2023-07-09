@@ -20,7 +20,12 @@ function Cart() {
 
   const calculateTotal = () => {
     return cart
-      .reduce((total, item) => total + item.price * item.count, 0)
+      .reduce(
+        (total, item) =>
+          total +
+          (item.price - item.price * (item.discount / 100)) * item.count,
+        0
+      )
       .toFixed(2);
   };
 
@@ -52,7 +57,12 @@ function Cart() {
                 <div className="cart-item-details">
                   <p className="cart-item-name">{item.name}</p>
                   <p className="cart-item-price">
-                    €{item.count > 0 && (item.price * item.count).toFixed(2)}
+                    €
+                    {item.count > 0 &&
+                      (
+                        (item.price - item.price * (item.discount / 100)) *
+                        item.count
+                      ).toFixed(2)}
                   </p>
                 </div>
                 <div className="cart-item-count">

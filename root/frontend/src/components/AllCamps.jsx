@@ -52,7 +52,24 @@ function AllCamps() {
             <div className="camp-card-content">
               <h2 className="camp-card-title">{camp.name}</h2>
               <p className="camp-card-summary">{camp.summary}</p>
-              <p className="camp-card-price">{camp.price} EUR/night</p>
+              {/* <p className="camp-card-price">{camp.price} EUR/night</p> */}
+              {camp.discount > 0 ? (
+                <p className="camp-card-price">
+                  <strong>Price:</strong>{' '}
+                  <span className="old-price">{camp.price} EUR/Night</span>
+                  <span className="new-price">
+                    {' '}
+                    {(camp.price - camp.price * (camp.discount / 100)).toFixed(
+                      2
+                    )}{' '}
+                    EUR/Night
+                  </span>
+                </p>
+              ) : (
+                <p className="camp-card-price">
+                  <strong>Price:</strong> {camp.price} EUR/Night
+                </p>
+              )}
               <div className="camp-card-btns">
                 <Link to={`/camps/${camp.id}`} className="camp-card-button">
                   Camp Details

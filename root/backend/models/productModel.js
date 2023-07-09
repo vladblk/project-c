@@ -14,11 +14,19 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'A product must have a price!'],
     },
+    discount: {
+      type: Number,
+      validate: {
+        validator: function (discountValue) {
+          return discountValue < this.price;
+        },
+        message: 'The discount can not be lower than the regular price!',
+      },
+    },
     quantity: {
       type: Number,
       required: [true, 'A product must have a quantity!'],
     },
-
     createdAt: {
       type: Date,
       default: () => Date.now(),
