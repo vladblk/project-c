@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 // import { useAuth } from '../AuthContext';
 import axios from 'axios';
 import NavBar from './NavBar';
+import Footer from './Footer';
 import ErrorBanner from './ErrorBanner';
 
 import '../style/SignUp.css';
@@ -103,6 +104,7 @@ function SignUp() {
           </Link>
         </form>
       </div>
+      <Footer />
     </>
   );
 }

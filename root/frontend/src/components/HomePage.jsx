@@ -4,6 +4,8 @@ import NavBar from './NavBar';
 import Hero from './Hero';
 import FeaturesSection from './FeaturesSection';
 import TestimonialsSection from './TestimonialsSection';
+import CtaSection from './CtaSection';
+import Footer from './Footer';
 
 function HomePage() {
   return (
@@ -12,6 +14,8 @@ function HomePage() {
       <Hero />
       <FeaturesSection />
       <TestimonialsSection />
+      <CtaSection />
+      <Footer />
     </>
   );
 }

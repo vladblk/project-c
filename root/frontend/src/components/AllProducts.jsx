@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../CartContext';
 import axios from 'axios';
 import NavBar from './NavBar';
+import Footer from './Footer';
 import '../App.css';
 import '../style/AllProducts.css';
 
@@ -79,6 +80,7 @@ function AllProducts() {
           </div>
         ))}
       </div>
+      <Footer />
     </>
   );
 }

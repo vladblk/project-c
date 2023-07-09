@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import NavBar from './NavBar';
+import Footer from './Footer';
 import '../style/AllCamps.css';
 import '../style/Loading.css';
 import '../App.css';
@@ -59,6 +60,7 @@ function AllCamps() {
           </div>
         ))}
       </div>
+      <Footer />
     </>
   );
 }

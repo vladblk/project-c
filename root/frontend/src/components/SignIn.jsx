@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { useAuth } from '../AuthContext';
 import NavBar from './NavBar';
+import Footer from './Footer';
 import ErrorBanner from './ErrorBanner';
 import ForgotPasswordModal from './ForgotPasswordModal';
 import { AuthContext } from '../AuthContext';
@@ -88,6 +88,7 @@ function SignIn() {
           <ForgotPasswordModal />
         </form>
       </div>
+      <Footer />
     </>
   );
 }

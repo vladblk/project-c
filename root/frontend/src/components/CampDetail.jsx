@@ -5,6 +5,7 @@ import { CartContext } from '../CartContext';
 import { FaTrashAlt } from 'react-icons/fa';
 import axios from 'axios';
 import NavBar from './NavBar';
+import Footer from './Footer';
 import '../style/Loading.css';
 import '../style/CampDetail.css';
 import '../App.css';
@@ -213,6 +214,7 @@ function CampDetail() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

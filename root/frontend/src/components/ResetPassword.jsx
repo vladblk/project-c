@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-// import { useAuth } from '../AuthContext';
 import NavBar from './NavBar';
+import Footer from './Footer';
 import ErrorBanner from './ErrorBanner';
 
 import '../style/ErrorBanner.css';
@@ -11,7 +11,6 @@ import '../style/SignIn.css';
 function ResetPassword() {
   const params = useParams();
   const navigate = useNavigate();
-  // const { login } = useAuth();
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [error, setError] = useState('');
@@ -81,6 +80,7 @@ function ResetPassword() {
           </Link>
         </form>
       </div>
+      <Footer />
     </>
   );
 }
