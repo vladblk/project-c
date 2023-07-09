@@ -45,11 +45,13 @@ function AllProducts() {
   }
 
   return (
-    <>
-      <NavBar />
-      <Link to="/">
-        <button className="back-button">Back</button>
-      </Link>
+    <div className="all-products-page">
+      <div>
+        <NavBar />
+        <Link to="/">
+          <button className="back-button">Back</button>
+        </Link>
+      </div>
       <div className="product-list">
         {products.map((product) => (
           <div key={product._id} className="product-card">
@@ -80,8 +82,10 @@ function AllProducts() {
           </div>
         ))}
       </div>
-      <Footer />
-    </>
+      <div>
+        <Footer />
+      </div>
+    </div>
   );
 }
 

@@ -39,11 +39,13 @@ function AllCamps() {
   }
 
   return (
-    <>
-      <NavBar />
-      <Link to="/">
-        <button className="back-button">Back</button>
-      </Link>
+    <div className="all-camps-page">
+      <div>
+        <NavBar />
+        <Link to="/">
+          <button className="back-button">Back</button>
+        </Link>
+      </div>
       <div className="all-camps-container">
         {camps.map((camp) => (
           <div key={camp._id} className="camp-card">
@@ -60,8 +62,10 @@ function AllCamps() {
           </div>
         ))}
       </div>
-      <Footer />
-    </>
+      <div>
+        <Footer />
+      </div>
+    </div>
   );
 }
 

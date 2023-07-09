@@ -50,7 +50,6 @@ function SignIn() {
   return (
     <>
       <NavBar />
-
       <div className="loginPage">
         <h1 className="loginPage__title">Sign in</h1>
         {error && <ErrorBanner message={error} />}

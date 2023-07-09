@@ -1,3 +1,10 @@
+.all-camps-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .all-camps-container {
   display: flex;
   flex-wrap: wrap;
