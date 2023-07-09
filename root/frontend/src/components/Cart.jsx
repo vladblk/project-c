@@ -67,18 +67,35 @@ function Cart() {
                 </div>
                 <div className="cart-item-count">
                   <button
-                    className="cart-item-count-increaseBtn"
+                    className="cart-item-count-decreaseBtn"
                     onClick={() => decreaseQuantity(item._id)}
                   >
                     -
                   </button>
-                  <p className="cart-item-count-number">{item.count}</p>
-                  <button
-                    className="cart-item-count-decreaseBtn"
-                    onClick={() => increaseQuantity(item._id)}
-                  >
-                    +
-                  </button>
+                  {!(
+                    item.hasOwnProperty('maxGroupSize') &&
+                    item.count >= item.maxGroupSize
+                  ) &&
+                    !(
+                      item.hasOwnProperty('stock') && item.count >= item.stock
+                    ) && (
+                      <>
+                        <p className="cart-item-count-number">{item.count}</p>
+                        <button
+                          className="cart-item-count-increaseBtn"
+                          onClick={() => increaseQuantity(item._id)}
+                        >
+                          +
+                        </button>
+                      </>
+                    )}
+                  {item.hasOwnProperty('maxGroupSize') &&
+                    item.count >= item.maxGroupSize && (
+                      <p>{`Max Group Size (${item.maxGroupSize}) reached`}</p>
+                    )}
+                  {item.hasOwnProperty('stock') && item.count >= item.stock && (
+                    <p>{`Stock size (${item.stock}) reached`}</p>
+                  )}
                 </div>
               </div>
             ))}
