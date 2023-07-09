@@ -1,0 +1,30 @@
+.cta-section {
+    padding: 8rem 0;
+    text-align: center;
+  }
+  
+  .section-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  
+  .section-description {
+    font-size: 1.8rem;
+    color: #666;
+    margin-bottom: 4rem;
+  }
+  
+  .cta-button {
+    padding: 1.5rem 4rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: #66bf60;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
