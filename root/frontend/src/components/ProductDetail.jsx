@@ -114,6 +114,9 @@ function ProductDetail() {
       </Link>
       <div className="product--detail">
         <h2 className="product--detail__name">{product.name}</h2>
+        <span className="product--detail__code">
+          Product code: {product._id}
+        </span>
         <div className="product--detail__ratings">
           <span>Rating: </span>
           <span className="rating-quantity">{product.ratingsQuantity}</span>
