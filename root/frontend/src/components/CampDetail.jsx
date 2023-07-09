@@ -130,18 +130,16 @@ function CampDetail() {
           {camp.discount > 0 ? (
             <p>
               <strong>Price:</strong>{' '}
-              <span className="old-price">{camp.price} EUR/Night</span>
+              <span className="old-price">{camp.price} €</span>
               <span className="new-price">
                 {' '}
-                {(camp.price - camp.price * (camp.discount / 100)).toFixed(
-                  2
-                )}{' '}
-                EUR/Night - {camp.discount}% Discount!
+                {(camp.price - camp.price * (camp.discount / 100)).toFixed(2)} €
+                - {camp.discount}% Discount!
               </span>
             </p>
           ) : (
             <p>
-              <strong>Price:</strong> {camp.price} EUR/Night
+              <strong>Price:</strong> {camp.price} €
             </p>
           )}
         </div>

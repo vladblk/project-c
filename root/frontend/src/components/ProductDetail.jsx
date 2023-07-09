@@ -127,19 +127,19 @@ function ProductDetail() {
           {product.discount > 0 ? (
             <p>
               <strong>Price:</strong>{' '}
-              <span className="old-price">{product.price} EUR/Night</span>
+              <span className="old-price">{product.price} €</span>
               <span className="new-price">
                 {' '}
                 {(
                   product.price -
                   product.price * (product.discount / 100)
                 ).toFixed(2)}{' '}
-                EUR/Night - {product.discount}% Discount!
+                € - {product.discount}% Discount!
               </span>
             </p>
           ) : (
             <p>
-              <strong>Price:</strong> {product.price} EUR/Night
+              <strong>Price:</strong> {product.price} €
             </p>
           )}
         </div>

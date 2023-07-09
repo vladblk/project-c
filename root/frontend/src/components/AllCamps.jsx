@@ -56,18 +56,18 @@ function AllCamps() {
               {camp.discount > 0 ? (
                 <p className="camp-card-price">
                   <strong>Price:</strong>{' '}
-                  <span className="old-price">{camp.price} EUR/Night</span>
+                  <span className="old-price">{camp.price} €</span>
                   <span className="new-price">
                     {' '}
                     {(camp.price - camp.price * (camp.discount / 100)).toFixed(
                       2
                     )}{' '}
-                    EUR/Night
+                    €
                   </span>
                 </p>
               ) : (
                 <p className="camp-card-price">
-                  <strong>Price:</strong> {camp.price} EUR/Night
+                  <strong>Price:</strong> {camp.price} €
                 </p>
               )}
               <div className="camp-card-btns">
