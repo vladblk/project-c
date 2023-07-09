@@ -15,7 +15,9 @@
   background-color: #fff;
   padding: 3rem;
   border-radius: 5px;
-  max-width: 400px;
+  max-width: 40rem;
+  max-height: 80rem;
+  overflow: scroll;
   position: relative;
 }
 
