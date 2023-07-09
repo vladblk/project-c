@@ -5,6 +5,7 @@ import '../style/MyAdminPageAddCamp.css';
 const MyAdminPageAddProduct = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
+  const [discount, setDiscount] = useState('');
   const [quantity, setQuantity] = useState('');
   const [description, setDescription] = useState('');
 
@@ -15,6 +16,7 @@ const MyAdminPageAddProduct = () => {
     const newProduct = {
       name,
       price: parseFloat(price),
+      discount: parseFloat(discount),
       quantity: parseInt(quantity),
       description,
     };
@@ -69,6 +71,20 @@ const MyAdminPageAddProduct = () => {
             className="input"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="discount" className="label">
+            Discount:
+          </label>
+          <input
+            type="number"
+            id="discount"
+            className="input"
+            value={discount}
+            onChange={(e) => setDiscount(e.target.value)}
             required
           />
         </div>
