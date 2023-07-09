@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema(
         message: 'The discount can not be lower than the regular price!',
       },
     },
-    quantity: {
+    stock: {
       type: Number,
       required: [true, 'A product must have a quantity!'],
     },

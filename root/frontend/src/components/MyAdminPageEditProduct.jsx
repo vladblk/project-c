@@ -6,7 +6,7 @@ import '../style/MyAdminPageEditCamp.css'; // take styles from camp css
 const MyAdminPageEditProduct = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState('');
+  const [stock, setStock] = useState('');
   const [description, setDescription] = useState('');
   const [productID, setProductID] = useState('');
 
@@ -17,11 +17,11 @@ const MyAdminPageEditProduct = () => {
       const response = await axios.get(`/api/v1/products/${productID}`);
       console.log(response.data.data.product);
 
-      const { name, price, quantity, description } = response.data.data.product;
+      const { name, price, stock, description } = response.data.data.product;
 
       setName(name);
       setPrice(price);
-      setQuantity(quantity);
+      setStock(stock);
       setDescription(description);
     } catch (err) {
       console.log(err);
@@ -35,7 +35,7 @@ const MyAdminPageEditProduct = () => {
     const product = {
       name,
       price: parseFloat(price),
-      quantity: parseInt(quantity),
+      stock: parseInt(stock),
       description,
     };
 
@@ -51,7 +51,7 @@ const MyAdminPageEditProduct = () => {
       // Reset the form
       setName('');
       setPrice('');
-      setQuantity('');
+      setStock('');
       setDescription('');
     } catch (error) {
       console.error(error); // Log any errors
@@ -60,7 +60,7 @@ const MyAdminPageEditProduct = () => {
     // Reset the form
     setName('');
     setPrice('');
-    setQuantity('');
+    setStock('');
     setDescription('');
   };
 
@@ -111,15 +111,15 @@ const MyAdminPageEditProduct = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="quantity" className="label">
-              Quantity:
+            <label htmlFor="stock" className="label">
+              Stock:
             </label>
             <input
               type="number"
               id="quantity"
               className="input"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              value={stock}
+              onChange={(e) => setStock(e.target.value)}
               required
             />
           </div>

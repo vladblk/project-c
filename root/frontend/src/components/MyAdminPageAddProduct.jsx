@@ -6,7 +6,7 @@ const MyAdminPageAddProduct = () => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [discount, setDiscount] = useState('');
-  const [quantity, setQuantity] = useState('');
+  const [stock, setStock] = useState('');
   const [description, setDescription] = useState('');
 
   const handleSubmit = async (e) => {
@@ -17,7 +17,7 @@ const MyAdminPageAddProduct = () => {
       name,
       price: parseFloat(price),
       discount: parseFloat(discount),
-      quantity: parseInt(quantity),
+      stock: parseInt(stock),
       description,
     };
 
@@ -30,7 +30,7 @@ const MyAdminPageAddProduct = () => {
       // Reset the form
       setName('');
       setPrice('');
-      setQuantity('');
+      setStock('');
       setDescription('');
     } catch (error) {
       console.error(error); // Log any errors
@@ -39,7 +39,7 @@ const MyAdminPageAddProduct = () => {
     // Reset the form
     setName('');
     setPrice('');
-    setQuantity('');
+    setStock('');
     setDescription('');
   };
 
@@ -90,15 +90,15 @@ const MyAdminPageAddProduct = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="quantity" className="label">
-            Quantity:
+          <label htmlFor="stock" className="label">
+            Stock:
           </label>
           <input
             type="number"
-            id="quantity"
+            id="stock"
             className="input"
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
             required
           />
         </div>
