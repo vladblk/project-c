@@ -112,6 +112,7 @@ function CampDetail() {
       </Link>
       <div className="camp--detail">
         <h2 className="camp--detail__name">{camp.name}</h2>
+        <span className="camp--detail__code">Camp code: {camp._id}</span>
         <p className="location">{camp.location.address}</p>
         <div className="camp--detail__ratings">
           <span>Rating: </span>
