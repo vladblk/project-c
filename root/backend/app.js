@@ -13,6 +13,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const productReviewRouter = require('./routes/productReviewRoutes');
 const productRouter = require('./routes/productRoutes');
 const checkoutRouter = require('./routes/checkoutRoutes');
+const stripeRouter = require('./routes/stripeRoutes');
 const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
@@ -96,6 +97,8 @@ app.use('/api/v1/productReviews', productReviewRouter);
 app.use('/api/v1/products', productRouter);
 
 app.use('/api/v1/checkout', checkoutRouter);
+
+app.use('/api/v1/stripe', stripeRouter);
 
 // handle unhandled routes
 app.all('*', (req, res, next) => {
