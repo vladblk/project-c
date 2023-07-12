@@ -34,6 +34,7 @@ function Cart() {
       .post('/api/v1/checkout', { items: cart })
       .then((res) => window.location.assign(res.data.url));
     console.log(response);
+    localStorage.removeItem('cart');
   };
 
   return (
