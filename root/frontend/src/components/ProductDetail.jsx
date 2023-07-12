@@ -144,12 +144,16 @@ function ProductDetail() {
           )}
         </div>
         <div className="btn-container">
-          <button
-            className="book-now-btn"
-            onClick={() => handleAddToCart(product)}
-          >
-            Add to cart
-          </button>
+          {product.stock > 0 ? (
+            <button
+              className="book-now-btn"
+              onClick={() => handleAddToCart(product)}
+            >
+              Add to cart
+            </button>
+          ) : (
+            <button className="out-of-stock-button">Out of stock</button>
+          )}
           {user.role === 'admin' && (
             <button className="deleteProductBtn" onClick={handleDeleteProduct}>
               Delete Product

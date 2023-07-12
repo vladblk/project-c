@@ -88,12 +88,18 @@ function AllProducts() {
                 >
                   Details
                 </Link>
-                <button
-                  className="product-btn-container-addToCart"
-                  onClick={() => handleAddToCart(product)}
-                >
-                  Add to cart
-                </button>
+                {product.stock > 0 ? (
+                  <button
+                    className="product-btn-container-addToCart"
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    Add to cart
+                  </button>
+                ) : (
+                  <button className="out-of-stock-button" disabled>
+                    Out of stock
+                  </button>
+                )}
               </div>
             </div>
           </div>
