@@ -83,6 +83,10 @@ const campSchema = new mongoose.Schema(
       coordinates: [Number],
       address: String,
     },
+    caracteristic: {
+      type: String,
+      default: 'camp',
+    },
   },
   {
     toJSON: { virtuals: true },

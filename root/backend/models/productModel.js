@@ -31,6 +31,10 @@ const productSchema = new mongoose.Schema(
       type: Date,
       default: () => Date.now(),
     },
+    caracteristic: {
+      type: String,
+      default: 'product',
+    },
   },
   {
     toJSON: { virtuals: true },
